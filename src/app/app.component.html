@@ -1,0 +1,57 @@
+<div id="app">
+  <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark bg-primary" [containerInside]="false">
+    <mdb-navbar-brand><a href="#" class="navbar-brand">Stock</a></mdb-navbar-brand>
+    <ul class="nav navbar-nav" routerLinkActive="active" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/companies" class="nav-link" routerLink="companies">Companies</a>
+      </li>
+      <li class="nav-item">
+        <a href="/user" class="nav-link" routerLink="user">User</a>
+      </li>
+      <li class="nav-item">
+        <a href="/buyoffers" class="nav-link" routerLink="buyoffers">Buy Offers</a>
+      </li>
+      <li class="nav-item">
+        <a href="/selloffers" class="nav-link" routerLink="selloffers">Sell Offers</a>
+      </li>
+      <li class="nav-item">
+        <a href="/resources" class="nav-link" routerLink="resources">Resources</a>
+      </li>
+
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+      <li class="nav-item">
+        <a href="/test" class="nav-link" routerLink="test">Test</a>
+      </li>
+      <li class="nav-item">
+        <a href="/chart" class="nav-link" routerLink="chart">Charts</a>
+      </li>
+      <li class="nav-item">
+        <a href="/signup" class="nav-link" routerLink="signup">Register</a>
+      </li>
+      <li class="nav-item">
+        <a href="signin" class="nav-link" routerLink="signin">Login</a>
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+      <li class="nav-item">
+        <a href="/test" class="nav-link" routerLink="test">Test</a>
+      </li>
+      <li class="nav-item">
+        <a href="/chart" class="nav-link" routerLink="chart">Charts</a>
+      </li>
+      <li class="nav-item">
+        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+      </li>
+      <li class="nav-item">
+        <a href class="nav-link" (click)="logout()">LogOut</a>
+      </li>
+    </ul>
+  </mdb-navbar>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+

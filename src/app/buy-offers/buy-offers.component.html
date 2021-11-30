@@ -1,0 +1,84 @@
+<div class="col-md-12">
+    <div class="card card-container container">
+        <h1 style="text-align: center;">Create a buy offer</h1>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+            <div class="form-group">
+                <label for="company">Company</label>
+                <select class="form-control" name="company" [(ngModel)]="form.company">
+                    <option *ngFor="let resource of resourceRates" [ngValue]="resource.company">{{resource.company.name}} - {{resource.rate}}zł</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="maxPrice">Max Price</label>
+                <input type="text" class="form-control" name="maxPrice" [(ngModel)]="form.maxPrice" required
+                    #maxPrice="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && maxPrice.invalid">
+                    Max price is required
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount</label>
+                <input type="text" class="form-control" name="amount" [(ngModel)]="form.amount" required
+                    #amount="ngModel" />
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && amount.invalid">
+                    <div *ngIf="amount.errors.required">Amount is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input matInput [matDatepicker]="picker" placeholder="Pick a date" class="form-control"
+                    name="date" [(ngModel)]="form.date" required #amount="ngModel">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </div>
+        
+            <div class="form-group">
+                <button class="btn btn-primary btn-block">
+                    Add an offer
+                </button>
+            </div>
+            <div class="form-group">
+                <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isAddFailed">
+                    Failed: {{errorMessage}}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- <div class="container" *ngIf="buyOffers">
+    <div class="jumbotron" *ngFor="let buyoffer of buyOffers">
+        <p>
+            <strong>User: </strong>
+            {{ buyoffer.user.username }}
+        </p>
+        <p>
+            <strong>Company: </strong>
+            {{ buyoffer.company.name }}
+        </p>
+        <p>
+            <strong>Start amount:</strong>
+            {{ buyoffer.startAmount }}
+        </p>
+        <p>
+            <strong>Amount:</strong>
+            {{ buyoffer.amount }}
+        </p>
+        <p>
+            <strong>Max price:</strong>
+            {{ buyoffer.maxPrice }}
+        </p>
+        <p>
+            <strong>Date limit:</strong>
+            {{ buyoffer.dateLimit.substring(0,10) }}
+        </p>
+        <p>
+            <strong>Actual:</strong>
+            {{ buyoffer.actual }}
+        </p>
+        <button (click)="onDelete(buyoffer)" style="width:auto;" class="btn btn-primary btn-block">
+            Delete an offer
+        </button>
+    </div>
+</div> -->

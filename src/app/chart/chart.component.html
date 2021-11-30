@@ -1,0 +1,50 @@
+<div class="container">
+    <div style="position: fixed; left: 20px; top: 60px;">
+        <mat-form-field appearance="fill">
+            <mat-label>Choose test</mat-label>
+            <mat-select (selectionChange)="refreshChart($event.value)">
+                <mat-option *ngFor="let name of names" [value]="name">
+                    {{name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+
+    <div class="chart-wrapper" style="margin-top: 40px;" *ngIf="name != ''">
+        <canvas id="chart1" baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
+            [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+    <div class="chart-wrapper" style="width: 66%; float: left;" *ngIf="name != ''">
+        <canvas id="chart2" baseChart [datasets]="lineChartData2" [labels]="lineChartLabels2"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="false" [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+
+    <div class="chart-wrapper" style="width: 32%; float: right;" *ngIf="name != ''">
+        <canvas id="chart3" baseChart [datasets]="lineChartData3" [labels]="lineChartLabels3"
+            [options]="lineChartOptions" [colors]="lineChartColors" [legend]="true" [chartType]="lineChartType"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+    <div class="chart-wrapper" style="margin-top: 40px; width: 48%; float: left;" *ngIf="name != ''">
+        <canvas id="chart4" baseChart [datasets]="lineChartData4" [labels]="lineChartLabels4" [options]="lineChartOptions"
+            [colors]="lineChartColors1" [legend]="lineChartLegend" [chartType]="lineChartType1"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+    <div class="chart-wrapper" style="margin-top: 40px; width: 48%; float: right;" *ngIf="name != ''">
+        <canvas id="chart5" baseChart [datasets]="lineChartData5" [labels]="lineChartLabels5" [options]="lineChartOptions"
+            [colors]="lineChartColors1" [legend]="lineChartLegend" [chartType]="lineChartType1"
+            [plugins]="lineChartPlugins">
+        </canvas>
+    </div>
+
+    <button *ngIf="name != ''" class="btn btn-primary btn-block" (click)="captureScreen()">Download PDF</button>
+    <button style="margin-bottom: 20px;" *ngIf="name != ''" class="btn btn-primary btn-block" (click)="exportExcel()">Export to Excel</button>
+
+
+</div>

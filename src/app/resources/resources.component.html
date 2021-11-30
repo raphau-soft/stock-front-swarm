@@ -1,0 +1,145 @@
+<div class="container">
+    <div class="buttons">
+        <button class="btn btn-primary" (click)="changeData('buyOffers')">Buy offers</button>
+        <button class="btn btn-primary" (click)="changeData('sellOffers')">Sell offers</button>
+        <button class="btn btn-primary" (click)="changeData('stocks')">Stocks</button>
+    </div>
+    <div *ngIf="whichTable==0 && buyOffers.length > 0">
+        <div style="text-align: center;margin-top: 10px;">
+            <h1>Your buy offers</h1>
+        </div>
+        <table mat-table [dataSource]="buyOffers" style="width: 100%;">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let buyOffer"> {{buyOffer.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="company">
+                <th mat-header-cell *matHeaderCellDef> Company </th>
+                <td mat-cell *matCellDef="let buyOffer"> {{buyOffer.company.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let buyOffer"> {{buyOffer.amount}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="maxPrice">
+                <th mat-header-cell *matHeaderCellDef> Max price </th>
+                <td mat-cell *matCellDef="let buyOffer"> {{buyOffer.maxPrice}}zł </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let buyOffer"> {{buyOffer.dateLimit.substring(0,10)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let buyOffer"> <button class="btn btn-primary" (click)="onDeleteBuyOffer(buyOffer)">x</button>  </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+        </table>
+    </div>
+    <div *ngIf="whichTable==0 && buyOffers.length == 0">
+        <div style="text-align: center;margin-top: 10px;">
+            <h1>You have no buy offers</h1>
+        </div>
+    </div>
+    <div *ngIf="whichTable==1 && sellOffers.length > 0">
+        <div style="text-align: center;margin-top: 10px;">
+            <h1>Your sell offers</h1>
+        </div>
+        <table mat-table [dataSource]="sellOffers" style="width: 100%;">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let sellOffer"> {{sellOffer.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="company">
+                <th mat-header-cell *matHeaderCellDef> Company </th>
+                <td mat-cell *matCellDef="let sellOffer"> {{sellOffer.stock.company.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let sellOffer"> {{sellOffer.amount}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="minPrice">
+                <th mat-header-cell *matHeaderCellDef> Min price </th>
+                <td mat-cell *matCellDef="let sellOffer"> {{sellOffer.minPrice}}zł </td>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let sellOffer"> {{sellOffer.dateLimit.substring(0,10)}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let sellOffer"> <button class="btn btn-primary" (click)="onDeleteSellOffer(sellOffer)">x</button>  </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+        </table>
+    </div>
+    <div *ngIf="whichTable==1 && sellOffers.length == 0">
+        <div style="text-align: center;margin-top: 10px;">
+            <h1>You have no sell offers</h1>
+        </div>
+    </div>
+    <div *ngIf="whichTable==2 && resourceDisplay.length > 0">
+        <div style="text-align: center;margin-top: 10px;">
+            <h1>Your stocks</h1>
+        </div>
+        <table mat-table [dataSource]="resourceDisplay" style="width: 100%;">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let stock"> {{stock.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="company">
+                <th mat-header-cell *matHeaderCellDef> Company </th>
+                <td mat-cell *matCellDef="let stock"> {{stock.company.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let stock"> {{stock.amount}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="rate">
+                <th mat-header-cell *matHeaderCellDef> Max price </th>
+                <td mat-cell *matCellDef="let stock"> {{stock.rate}}zł </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns3"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+        </table>
+    </div>
+    <div *ngIf="whichTable==2 && resourceDisplay.length == 0">
+        <div style="text-align: center;margin-top: 10px;">
+            <h1>You have no stocks</h1>
+        </div>
+    </div>
+</div>

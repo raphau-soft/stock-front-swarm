@@ -1,0 +1,12 @@
+<div class="container" *ngIf="transactions">
+    <div *ngFor="let transaction of transactions" class="jumbotron">
+        BuyOffer username - {{transaction.buyOffer.user.username}}<br>
+        SellOffer username - {{transaction.sellOffer.stock.user.username}}<br>
+        Amount - {{transaction.amount}}<br>
+        Price - {{transaction.price}}<br>
+        Date - {{transaction.date.substring(0,10)}}
+    </div>
+    
+    
+    
+</div>

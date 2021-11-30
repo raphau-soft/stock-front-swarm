@@ -1,0 +1,170 @@
+<div class="card card-container container" style="margin-bottom: 15px;">
+    <form name="form" #f="ngForm" (ngSubmit)="f.form.valid && onSubmit()" novalidate>
+        <div class="form-group">
+            <label for="numberOfUsers">Number of users:</label>
+            <input type="number" class="form-control" name="numberOfUsers" [(ngModel)]="form.numberOfUsers" required
+                #numberOfUsers="ngModel" />
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && numberOfUsers.invalid">
+                Number of users is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="testTime">Test's time (s):</label>
+            <input type="number" class="form-control" name="testTime" [(ngModel)]="form.testTime"
+                required #testTime="ngModel" />
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && testTime.invalid">
+                Test's time is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="requestsNumber">User's requests number:</label>
+            <input type="number" class="form-control" name="requestsNumber" [(ngModel)]="form.requestsNumber"
+                required #requestsNumber="ngModel" />
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && requestsNumber.invalid">
+                User's requests number is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="timeBetweenRequests">Time between requests (ms):</label>
+            <input type="number" class="form-control" name="timeBetweenRequests" [(ngModel)]="form.timeBetweenRequests"
+                required #timeBetweenRequests="ngModel" />
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && timeBetweenRequests.invalid">
+                Time between requests is required
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="strategy">Strategy:</label><br>
+            <mat-radio-group class="tp-radio-group" [(ngModel)]="form.strategy" name="strategy" #strategy="ngModel"
+                style="margin-left: 15px;">
+                <mat-radio-button class="tp-radio-button" *ngFor="let strategy of strategies" [value]="strategy">
+                    {{strategy}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <div class="form-group">
+            <label for="stockPlay">Chance for playing on stock:</label>
+            <mat-slider style="width:50%;" name="stockPlay" min="0" max="100" step="1" [(ngModel)]="form.stockPlay"
+                #stockPlay="ngModel" (input)="onChanceStockChange($event)"></mat-slider>
+            {{form.stockPlay}}%
+        </div>
+
+        <div class="form-group" style="margin-left: 30px">
+            <label for="createBuyOffer">Chance for creating a buy offer:</label>
+            <mat-slider style="width:50%;" name="createBuyOffer" min="0" max="100" step="1"
+                [(ngModel)]="form.createBuyOffer" #createBuyOffer="ngModel" (input)="onCreateBOChange($event)">
+            </mat-slider>
+            {{form.createBuyOffer}}%
+        </div>
+
+        <div class="form-group" style="margin-left: 30px">
+            <label for="createSellOffer">Chance for creating a sell offer:</label>
+            <mat-slider style="width:50%;" name="createSellOffer" min="0" max="100" step="1"
+                [(ngModel)]="form.createSellOffer" #createSellOffer="ngModel" (input)="onCreateSOChange($event)">
+            </mat-slider>
+            {{form.createSellOffer}}%
+        </div>
+
+        <div class="form-group" style="margin-left: 30px">
+            <label for="deleteBuyOffer">Chance for deleting a buy offer:</label>
+            <mat-slider style="width:50%;" name="deleteBuyOffer" min="0" max="100" step="1"
+                [(ngModel)]="form.deleteBuyOffer" #deleteBuyOffer="ngModel" (input)="onDeleteBOChange($event)">
+            </mat-slider>
+            {{form.deleteBuyOffer}}%
+        </div>
+
+        <div class="form-group" style="margin-left: 30px">
+            <label for="deleteSellOffer">Chance for deleting a sell offer:</label>
+            <mat-slider style="width:50%;" name="deleteSellOffer" min="0" max="100" step="1"
+                [(ngModel)]="form.deleteSellOffer" #deleteSellOffer="ngModel" (input)="onDeleteSOChange($event)">
+            </mat-slider>
+            {{form.deleteSellOffer}}%
+        </div>
+
+        <div class="form-group">
+            <label for="dataCheck">Chance for checking data:</label>
+            <mat-slider style="width:50%;" name="dataCheck" min="0" max="100" step="1" [(ngModel)]="form.dataCheck"
+                #dataCheck="ngModel" (input)="onChanceDataChange($event)"></mat-slider>
+            {{form.dataCheck}}%
+        </div>
+
+        <div class="form-group" style="margin-left: 30px">
+            <label for="checkBuyOffers">Chance for checking buy offers</label>
+            <mat-slider style="width:50%;" name="checkBuyOffers" min="0" max="100" step="1"
+                [(ngModel)]="form.checkBuyOffers" #checkBuyOffers="ngModel" (input)="onBOCheckChange($event)">
+            </mat-slider>
+            {{form.checkBuyOffers}}%
+        </div>
+
+        <div class="form-group">
+            <label for="checkSellOffers" style="margin-left: 30px">Chance for checking sell offers:</label>
+            <mat-slider style="width:50%;" name="checkSellOffers" min="0" max="100" step="1"
+                [(ngModel)]="form.checkSellOffers" #checkSellOffers="ngModel" (input)="onSOCheckChange($event)">
+            </mat-slider>
+            {{form.checkSellOffers}}%
+        </div>
+
+        <div class="form-group">
+            <label for="checkUserData" style="margin-left: 30px">Chance for checking user's data:</label>
+            <mat-slider style="width:50%;" name="checkUserData" min="0" max="100" step="1"
+                [(ngModel)]="form.checkUserData" #checkUserData="ngModel" (input)="onUDCheckChange($event)">
+            </mat-slider>
+            {{form.checkUserData}}%
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-block">
+                Save configuration
+            </button>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isConfigurationFailed">
+                Configuration save failed: {{errorMessage}}
+            </div>
+        </div>
+        <div class="alert alert-success" *ngIf="isConfigurationChanged">
+            Configuration saved
+        </div>
+    </form>
+    <form name="testForm" #f1="ngForm" (ngSubmit)="f1.form.valid && onSubmitRun()" novalidate>
+        <div class="form-group">
+            <label for="test">Test's name</label>
+            <input type="text" class="form-control" name="test" [(ngModel)]="testForm.testName" required minlength="3"
+                #test="ngModel" />
+            <div class="alert alert-danger" role="alert" *ngIf="f1.submitted && test.invalid">
+                <div *ngIf="test.errors.required">Test's name is required</div>
+                <div *ngIf="test.errors.minlength">Test's name must be at least 6 characters</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" style="margin-bottom: 50px;">Run Tests</button>
+        </div>
+        <div class="form-group">
+            <div class="alert alert-danger" role="alert" *ngIf="f1.submitted && isNameTaken">
+                Test's name is already taken
+            </div>
+        </div>
+        <div class="alert alert-success" *ngIf="isTestRunning">
+            Test is running...
+        </div>
+    </form>
+    <div style="margin-bottom: 50px;">
+        <div style="float: left;">
+            <button (click)="cleanDB()" mat-raised-button color="primary" style="margin-bottom: 5px;margin-right: 5px;">Clean test database</button>
+        </div>
+        <div>
+            <button (click)="restartStockDB()" mat-raised-button color="primary" style="margin-bottom: 5px;">Restart stock exchange database</button>
+        </div>
+        <div class="alert alert-success" *ngIf="isTrafficTestClean&&isStockTestClean">
+            Test's database is clean!
+        </div>
+        <div class="alert alert-success" *ngIf="isDBRestarted">
+            Stock exchange database is restarted!
+        </div>
+    </div>
+
+</div>

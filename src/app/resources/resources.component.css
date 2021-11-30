@@ -1,0 +1,18 @@
+.container{
+    width: 70%;
+    margin-top: 100px;
+    padding: 40px;
+    border: 1px solid #777;
+    -webkit-box-shadow: 7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+ }
+
+.btn{
+    width: 30%;
+    margin: 5px;
+}
+
+.buttons{
+    text-align: center;
+}
